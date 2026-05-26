@@ -1,1 +1,3 @@
-<h1>Bienvenido al Catálogo de Películas</h1>
+@for(movie of misPeliculas; track movie.id) {
+  <a [routerLink]="['/movies', movie.id]">{{movie.title}}</a>
+}

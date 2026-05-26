@@ -1,1 +1,19 @@
-<p>movie-details works!</p>
+@if(pelicula) {
+  <div class="movie-detail-card">
+    <h2>{{ pelicula.title }}</h2>
+
+    <div class="movie-meta">
+      <p><strong>Director:</strong> {{ pelicula.director }}</p>
+      <p><strong>Género:</strong> {{ pelicula.genre }}</p>
+    </div>
+  </div>
+} @else {
+  <div class="loading">
+    <p>Cargando detalles de la película o película no encontrada...</p>
+  </div>
+}
+<div>
+  <button (click)="volverAlListado()" class="btn btn-back">
+    Volver al listado
+  </button>
+</div>
