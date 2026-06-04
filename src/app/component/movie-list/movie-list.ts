@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MoviesService } from '../../services/movies-service';
 import { Movie } from '../../interface/movie';
 import { RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-movie-list',
@@ -9,11 +10,9 @@ import { RouterLink } from '@angular/router';
   templateUrl: './movie-list.html',
   styleUrl: './movie-list.css',
 })
-export class MovieList implements OnInit {
+export class MovieList {
   private moviesService = inject(MoviesService);
-  misPeliculas: Movie[] = [];
+  // misPeliculas: Movie[] = [];
 
-  ngOnInit(): void {
-    this.misPeliculas = this.moviesService.getMovies();
-  }
+  misPeliculas = toSignal(this.moviesService.getMovies(), { initialValue: [] });
 }

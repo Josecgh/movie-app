@@ -19,12 +19,18 @@ export class MovieDetails implements OnInit {
   ngOnInit(): void {
     const id = this.getId();
 
-    this.pelicula = this.moviesService.getMovieById(id);
+    this.moviesService.getMovieById(id).subscribe({
+      next: (data) => {
+        this.pelicula = data;
+      },
+      error: (err) => {
+        console.error('Error al cargar la película:', err);
+      }
+    });
   }
 
   getId(): string {
-    const idParam = this.route.snapshot.paramMap.get('movieId');
-    return idParam ?? '';
+    return this.route.snapshot.paramMap.get('movieId') ?? '';
   }
 
   volverAlListado(): void {
