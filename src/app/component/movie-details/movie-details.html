@@ -1,10 +1,10 @@
-@if(pelicula) {
+@if(pelicula()) {
   <div class="movie-detail-card">
-    <h2>{{ pelicula.title }}</h2>
+    <h2>{{ pelicula()?.title }}</h2>
 
     <div class="movie-meta">
-      <p><strong>Director:</strong> {{ pelicula.director }}</p>
-      <p><strong>Género:</strong> {{ pelicula.genre }}</p>
+      <p><strong>Director:</strong> {{ pelicula()?.director }}</p>
+      <p><strong>Género:</strong> {{ pelicula()?.genre }}</p>
     </div>
   </div>
 } @else {

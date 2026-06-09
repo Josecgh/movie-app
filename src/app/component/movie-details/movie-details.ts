@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MoviesService } from '../../services/movies-service';
 import { Movie } from '../../interface/movie';
@@ -14,14 +14,14 @@ export class MovieDetails implements OnInit {
   private moviesService = inject(MoviesService);
   private router = inject(Router);
   
-  pelicula: Movie | undefined;
+  pelicula = signal<Movie | undefined>(undefined);
 
   ngOnInit(): void {
     const id = this.getId();
 
     this.moviesService.getMovieById(id).subscribe({
       next: (data) => {
-        this.pelicula = data;
+        this.pelicula.set(data);
       },
       error: (err) => {
         console.error('Error al cargar la película:', err);
